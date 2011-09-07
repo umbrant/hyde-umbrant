@@ -8,3 +8,4 @@ deploy/*
 pylint*
 *.tmproj
 test_site
+deploy.cfg
