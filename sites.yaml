@@ -1,0 +1,15 @@
+clydetest: 
+    path: ~/clydetest
+    repo:
+        type: repos.git.Git
+        url: git@github.com:lakshmivyas/clydetest.git
+        draft_branch: drafts
+        production_branch: master
+
+site2: 
+    path: ~/mysite
+    repo:
+        type: repos.git.Git
+        url: git@github.com:lakshmivyas/clydetest.git
+        draft_branch: drafts
+        production_branch: master

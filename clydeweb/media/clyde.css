@@ -1,0 +1,272 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+
+/* remember to define focus styles! */
+:focus {
+	outline: 0;
+}
+
+/* remember to highlight inserts somehow! */
+ins {
+	text-decoration: none;
+}
+del {
+	text-decoration: line-through;
+}
+
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}       
+
+/* new clearfix */
+.clearfix:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: " ";
+	clear: both;
+	height: 0;
+	}
+* html .clearfix             { zoom: 1; } /* IE6 */
+*:first-child+html .clearfix { zoom: 1; } /* IE7 */ 
+
+.amp {
+    font-family: Skia, Baskerville, Palatino, "Book Antiqua", serif;
+    font-style: italic;
+    line-height: 75%;
+}
+
+.caps {
+    font-variant: small-caps;
+}   
+
+.markItUpButton:hover,
+.button:hover{
+    color:black;
+    background-color: rgba(0, 0, 0, 0.1);    
+}   
+
+.button:hover {   
+    background-image: -moz-linear-gradient(top, bottom,from(rgb(248, 248, 248)), to(rgb(221, 221, 221)));     
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgb(248, 248, 248)), to(rgb(221, 221, 221)));
+}
+
+
+.button:active {
+     background: -webkit-gradient(linear, 0% 0%, 0% 100%, 
+                        from(rgb(204, 204, 204)), to(rgb(221, 221, 221))); 
+}
+
+em{
+    padding-right: 4px;
+} 
+
+a{
+    color: gray;
+    text-decoration: none;
+}                         
+
+a:hover{
+    color: black;
+}
+
+body{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; 
+    font-size: 12px;    
+    line-height: 16px;
+    width: 1024px;
+    margin:0 auto;   
+    vertical-align: baseline;
+}   
+
+footer,
+header{
+    clear:both;
+    display:block;
+    height: 32px; 
+    margin-top: 32px;     
+    padding-top: 4px;
+}      
+   
+header{      
+    border-bottom: 1px solid gray;
+}
+
+footer{
+    width: 1024px;
+    margin:32px auto 0;
+    padding-top: 32px;
+}       
+
+header h1{                
+    font-weight: 300;    
+    font-size: 18px;    
+    float: left;
+}    
+
+nav{
+    float: right;
+}
+
+nav ul{
+    list-style-type:none;
+    margin-top: 3px; 
+} 
+
+nav#sites{     
+    display:block;
+    float:none;
+    width: 100%; 
+    margin-bottom: 32px;
+    color: gray;        
+}              
+
+#sites > ol{
+    width:100%;           
+    background-color: rgba(0, 0, 0, 0.1);
+    min-height: 30px;
+    display:none;    
+    margin:0;
+    padding-top: 16px;
+    padding-bottom:16px;
+    border-bottom: 1px solid gray;      
+    list-style-type:decimal;
+}
+
+#sites li{
+    float:left;
+    margin-left:32px;
+} 
+  
+footer p{
+    margin-left: 16px;
+}   
+
+footer li,
+nav li{
+    float:left;       
+    margin:0 0 0 16px;
+}   
+
+aside{
+    float:left;
+    width: 340px;
+}   
+
+aside .buttonbar{  
+  float:left;
+}
+
+aside .button{
+    display:block;
+    float:left;
+    font-size: 10px;
+    font-family:Helvetica, Arial, sans-serif;    
+    padding: 4px;    
+    margin-top: -3px;
+}
+
+aside .button img{
+    margin-top: 3px;
+}
+
+#crumbs > h2,
+aside h2{
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;  
+  font-weight: 300;   
+  font-size: 16px;
+}         
+
+aside h2{
+    float:right;
+}
+
+#header-bar{
+    clear:both; 
+    height: 32px;  
+    margin-bottom: 16px;
+}
+
+#crumbs,
+#header-bar{
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+
+}       
+
+#crumbs{
+    height: 32px;
+    clear:both; 
+    margin-bottom:8px;
+}
+
+#crumbs h2{
+    float: left;                                                    
+}    
+
+#crumbs .buttonbar{
+    float: right; 
+    margin-top: -4px;
+}
+
+#crumbs .buttonbar .button{
+    margin-left: 4px;
+}
+
+section{
+    float:right;   
+    width: 664px;
+}   
+
+#files{
+    padding-top: 5px;
+}
+
+#files li{
+    line-height: 24px;
+}   
+
+
+section .markItUp{
+    clear:both;
+    padding-top: 1px;
+    width: 653px;
+}
+
+section .markItUpEditor{
+    min-height: 700px;
+    width: 100%;
+}  
+section .saveButton{
+    background: url(images/disk-black.png) no-repeat center center;
+}

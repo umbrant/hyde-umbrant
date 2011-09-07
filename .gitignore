@@ -1,0 +1,10 @@
+*~
+*.pyc
+.DS_Store
+deploy/*
+*.cprof
+*.profile
+*.log
+pylint*
+*.tmproj
+test_site

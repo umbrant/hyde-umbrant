@@ -1,0 +1,28 @@
+{% extends "skeleton/_root.html" %}
+{%hyde
+ 
+ title: Test Page
+ created: 2009-02-26 21:22:23
+    
+%}
+{% block all %}
+<html>
+    <head>
+        <title>{{page.title}}</title>
+    </head>
+    <body>
+
+{%markdown%}
+{%excerpt%}
+#{{page.title}}#
+#Heading 1#
+Heading 1 Text
+
+{%endexcerpt%}
+
+##Heading 2##
+Heading 2 Text
+{%endmarkdown%}
+    </body>
+</html>
+{% endblock %}

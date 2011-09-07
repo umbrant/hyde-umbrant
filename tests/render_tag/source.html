@@ -1,0 +1,25 @@
+{% extends "skeleton/_root.html" %}
+
+{% hyde
+    data:
+        -
+          id: music
+          title: "#### Music"
+          content: >
+            Keep your favorite songs at your fingertips.
+
+        -
+          id: genius
+          title: "#### Genius"
+          content: >
+            A musical Genius creates the perfect mix.
+            You can add more lines like this
+
+            #### perhaps like this as well
+%}
+
+{% block all %}
+
+{% render render.html with page.data %}
+
+{% endblock %}

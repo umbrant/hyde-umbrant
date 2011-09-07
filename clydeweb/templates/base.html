@@ -1,0 +1,229 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Clyde - Hyde on the Cloud</title>
+    <link rel="stylesheet" href="{{static_url("clyde.css")}}" 
+        type="text/css" media="screen" charset="utf-8">        
+        <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+        <script type="text/javascript">
+            google.load("jquery", "1.3");
+        </script>                   
+        <script src="{{static_url("jstree/jquery.tree.min.js")}}" type="text/javascript" charset="utf-8"></script> 
+        <script src="{{static_url("markitup/jquery.markitup.pack.js")}}" type="text/javascript" charset="utf-8"></script> 
+        <script src="{{static_url("markitup/sets/hyde/base.js")}}" type="text/javascript" charset="utf-8"></script> 
+        
+        <link rel="stylesheet" type="text/css" href="{{static_url("markitup/skins/simple/style.css")}}" />
+        <link rel="stylesheet" type="text/css" href="{{static_url("markitup/sets/default/style.css")}}" />           
+  </head>
+  <body>
+      <header>                              
+          <hgroup>
+              <h1>Clyde</h1>
+          </hgroup>
+          <nav>
+            <ul> 
+                <li><a id="sites-button" href="/sites">Sites<span>&darr;</span></a></li>
+                <li><a id="signout-button" href="/signout">Sign Out</a></li>
+            </ul>    
+          </nav> 
+      </header>  
+      <nav id="sites">
+      </nav>
+      <aside> 
+          <div id="header-bar">
+           <hgroup>
+              <h2>{{site}}</h2>
+           </hgroup>   
+            <div class="buttonbar">
+               <a id="new-file-button" class="button" href="/site/{{site}}/new-file" title="New File"><img title="New File" alt="New File" src="{{static_url("images/document--plus.png")}}"></a>
+               <a id="new-folder-button" class="button"  href="/site/{{site}}/new-folder"  title="New Folder"><img title="New Folder" alt="New Folder" src="{{static_url("images/folder--plus.png")}}"></a>               
+               <a id="rename-button" class="button"  href="/site/{{site}}/rename"  title="Rename"><img title="Rename" alt="Rename" src="{{static_url("images/drive-rename.png")}}"></a>                
+               <a id="delete-button" class="button"  href="/site/{{site}}/delete"  title="Delete"><img title="Delete" alt="Delete" src="{{static_url("images/cross-button.png")}}"></a>                               
+               <a id="push-button" class="button" href="/site/{{site}}/publish" title="Publish"><img title="Publish" alt="Publish" src="{{static_url("images/network-cloud.png")}}"></a>
+               <a id="generate-button" class="button" href="/site/{{site}}/generate" title="Generate"><img title="Generate" alt="Generate" src="{{static_url("images/gear.png")}}"></a>                               
+             </div>
+           </div>
+           <div id="files"></div>
+      </aside>                           
+      <section> 
+          <div id="crumbs">
+              <h2>Select a file</h2>             
+          </div> 
+          <textarea id="editor"></textarea>
+           <p>
+              Select a file from the file navigator to the left to edit
+              or press the add button to create a new file. When done 
+              press the publish button if you are ready.
+            </p>
+      </section>
+      <footer>
+          <ul>      
+            <li><a rel="external" href="http://ringce.com/hyde">
+                Hyde</a></li>
+            <li><a rel="external" 
+            href="http://github.com/lakshmivyas/hyde">
+                Source</a></li>
+            <li><a rel="external"
+            href="http://groups.google.com/group/hyde-dev">
+                Discussions</a></li></ul>                                               
+                <br/><br/>
+           <p><a href="http://www.pinvoke.com">Fugue Icons</a> by Yusuke Kamiyamane.</p>
+      </footer>  
+      <script type="text/javascript">  
+                var current_path = null;
+                var sites = null;                 
+
+                var save_draft = function(){
+                      if (!current_path) return false;   
+                      $.post('/site/{{site}}/content/save', {
+                          path: current_path,
+                          content: $("#editor").val()
+                      });
+                      return false;
+                   }
+
+                $(function(){  
+                    
+                   $("#editor").markItUp(getHydeSet(save_draft));  
+                   $("#rename-button").unbind('click').bind('click', function(){
+                        var t = $.tree.focused(); 
+                        if (t.selected){
+                            t.rename(t.selected);
+                        }                        
+                        return false;
+                   });  
+                   
+                    $("#delete-button").unbind('click').bind('click', function(){
+                           var t = $.tree.focused(); 
+                           if (t.selected){
+                               t.remove(t.selected);
+                           }                        
+                           return false;
+                      });
+                   
+                   $("#generate-button").unbind('click').bind('click', function(){
+                       $.post('/site/{{site}}/generate');
+                       return false;
+                   });
+                   
+                   $("#sites-button").unbind('click').bind('click', function(){
+                       if (!sites){ 
+                          $.getJSON('/sites', function(data){
+                              sites = data;
+                              var site_list = "<ol style=\"display:none\">";
+                              $(sites).each(function(i, site){    
+                                 site_list += "<li><a href=\"/site/";
+                                 site_list += site;
+                                 site_list += "\">"; 
+                                 site_list += site; 
+                                 site_list += "</a></li>";                                  
+                              });                                                         
+                              site_list += "</ol>";
+                              $("#sites").html(site_list);
+                              $("#sites ol").slideDown("slow");       
+                              $("#sites-button span").html("&uarr;"); 
+                          }); 
+                       }  else{
+                           $("#sites ol").slideToggle("slow", function(){
+                               if($(this).is(":hidden")){
+                                   $("#sites-button span").html("&darr;");
+                               } else {
+                                   $("#sites-button span").html("&uarr;");
+                               }
+                           });
+                       }  
+                       return false;
+                   });
+                   
+                   $("#push-button").unbind('click').bind('click', function(){
+                         $.post('/site/{{site}}/publish');
+                         return false;
+                      });    
+                   
+                   function newFileOrFolder(fileOrFolder){
+                        var t = $.tree.focused();  
+                        var name = fileOrFolder == "file" ? "new_file" : "new_folder/";
+                          if(t.selected){                             
+                              newNode = t.create({
+                                  attributes: {
+                                      rel:fileOrFolder,                                   
+                                      tooltip:t.selected.attr("tooltip") + name
+                                  }}, t.selected, 'inside');
+                          } 
+                          return false;
+                   }
+                   
+                   $("#new-folder-button").unbind('click').bind('click', function(){
+                         return newFileOrFolder("folder");
+                     }); 
+                    
+                     $("#new-file-button").unbind('click').bind('click', function(){
+                           return newFileOrFolder("file");
+                       });  
+                                          
+                   $("#files").tree({ 
+                       ui : { 
+                           dots: false,
+                           theme_name: "apple",
+                           theme_path: "{{static_url("jstree/themes/apple/style.css")}}"
+                       }, 
+                       types : {
+                           "file" : {
+                                      max_children : 0,
+                                      icon : { 
+                                          image : "{{static_url("jstree/themes/apple/file.png")}}"
+                                      }        
+                           }
+                       },
+                      data : {
+                          type: 'json',
+                          opts : {
+                                  url: '/site/{{site}}/files'
+                          }
+                      },
+                      callback : {
+                          onchange: function(node, tree){
+                              current_path = node.attributes.tooltip.value;  
+                              $("#crumbs h2").text("/" + current_path);
+                              if (node.attributes.rel.value == 'file'){
+                                  $("#editor").show();
+                                  $("#editor").load(
+                                      '/site/{{site}}/content?path=' +
+                                       encodeURIComponent(current_path));                                  
+                              }  else {
+                                   $("#editor").val("");                                  
+                              }   
+                              
+                          },
+                         ondelete: function(node, tree, RB){
+                             var path = node.attributes.tooltip.value; 
+                             var type = tree.get_type(node);
+                             $.post('/site/{{site}}/delete?path=' 
+                                         + encodeURIComponent(path)
+                                         + "&type="
+                                         + type
+                                         );                             
+                         },   
+                         onrename: function(node, tree, RB){ 
+                            var originalPath =  node.attributes.tooltip.value;
+                            var path =  tree.parent(node).attr('tooltip')  + tree.get_text(node);                                              
+                            var type = tree.get_type(node);
+                            if (type == "folder"){
+                                path += "/";
+                            }
+                            $(node).attr("tooltip", path);
+                            $.post('/site/{{site}}/rename?path=' 
+                                    + encodeURIComponent(path)
+                                    + "&original_path="
+                                    + encodeURIComponent(originalPath) 
+                                    + "&type="
+                                    + type
+                                    );
+                         } 
+                      }
+
+                   }); 
+                });
+            </script>
+  </body>
+</html>

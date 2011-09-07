@@ -1,0 +1,15 @@
+{% extends "skeleton/_root.html" %}
+{% block all %}
+{% recent_posts posts 5 page.blog_node [wishes|joy] %}
+{% recent_posts allposts 5 page.blog_node %}
+<html>
+    <body>
+{% for p in posts %}
+<h1>{{p.title}}</h1>
+{% endfor %}
+{% for p in allposts %}
+<h1>{{p.title}}</h1>
+{% endfor %}
+    </body>
+</html>
+{% endblock %}

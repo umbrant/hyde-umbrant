@@ -1,0 +1,14 @@
+{% load markup %}
+<ul lass="scrollernav">
+    {% for item in data%}
+        <li>
+            <a class="scrollToAnchor" href="#{{item.id}}">
+                <img src="http://images.apple.com/ipodnano/images/features_anchor_{{item.id}}20100901.jpg"
+                width="100"
+                height="95">
+                {{item.title|markdown}}
+                {{item.content|markdown}}
+                <span class="more">More</span>
+        </li>
+    {% endfor %}
+</ul>

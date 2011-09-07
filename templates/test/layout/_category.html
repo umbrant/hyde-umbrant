@@ -1,0 +1,6 @@
+<h1>You are viewing the posts from the category {{category}}</h1>
+<ul>
+  {% for p in posts %}
+  <li>{{p.title}}, created on {{p.created}}</li>
+  {% endfor %}
+</ul>
