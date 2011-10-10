@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import simples3
 import os, sys
 import re
