@@ -92,8 +92,8 @@ for root, dirs, files in os.walk(SOURCE_DIR):
             if sf["metadata"].has_key("modtime") and \
             sf["metadata"]["modtime"] == str(stat.st_mtime):
                 continue
-        except simples3.bucket.KeyNotFound:
-            pass
+        #except simples3.bucket.KeyNotFound:
+        #    pass
         except KeyError:
             pass
         finally:
