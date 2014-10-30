@@ -5,3 +5,4 @@ BUCKET_NAME=www.umbrant.com
 BASE_URL=https://s3-us-west-1.amazonaws.com/www.umbrant.com
 # Location of static content
 SOURCE_DIR=../umbrant-blog/deploy
+NUM_WORKERS=1
