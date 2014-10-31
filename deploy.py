@@ -42,7 +42,7 @@ class Worker(Thread):
 
         stat = os.stat(filename)
         metadata = {"modtime":str(stat.st_mtime)}
-        headers = {'x-amz-meta-Cache-Control' : 'max-age=3600'}
+        headers = {'Cache-Control' : 'max-age=3600'}
 
         # check if it's changed with modtimes
         sf = False
